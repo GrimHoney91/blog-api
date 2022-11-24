@@ -11,9 +11,9 @@ const session = require('express-session'); //implement
 const helmet = require('helmet');
 const compression = require('compression');
 
-
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const portalRouter = require('./routes/portal-router')
+const userRouter =  require('./routes/user-router');
+const postRouter = require('./routes/post-router');
 
 const app = express();
 
@@ -35,8 +35,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/portal', portalRouter);
+app.use('/users', userRouter);
+app.use('/posts', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
